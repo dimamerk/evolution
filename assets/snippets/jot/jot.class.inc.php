@@ -6,7 +6,7 @@
 #	Author: Armand "bS" Pondman (apondman@zerobarrier.nl)
 #	Date: Aug 04, 2008
 #
-# Latest Version: http://modxcms.com/Jot-998.html
+# Latest Version: http://modx.com/extras/package/jot
 # Jot Demo Site: http://projects.zerobarrier.nl/modx/
 # Documentation: http://wiki.modxcms.com/index.php/Jot (wiki)
 #
@@ -335,7 +335,7 @@ class CJot {
 		return implode("",$output);
 	}
 	
-	// Create placeholders in MODx from arrays
+	// Create placeholders in MODX from arrays
 	function setPlaceholders($value = '', $key = '', $path = '') {
 		global $modx;
 		$keypath = !empty($path) ? $path . "." . $key : $key;
@@ -867,7 +867,7 @@ class CJot {
 		return $usrIDs;
 	}	
 	
-	// MODx UserInfo enhanced
+	// MODX UserInfo enhanced
 	function getUserInfo($userid = 0,$field = NULL) {
 		global $modx;
 		if (intval($userid) < 0) {
@@ -879,7 +879,7 @@ class CJot {
 		return $user;
 	}	
 	
-	// MODx makeUrl enhanced: preserves querystring.
+	// MODX makeUrl enhanced: preserves querystring.
 	function preserveUrl($docid = '', $alias = '', $array_values = array(), $suffix = false) {
 		global $modx;
 		$array_get = $_GET;

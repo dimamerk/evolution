@@ -33,13 +33,6 @@ function record_sort($array, $key) {
 	return $records;
 }
 
-// function to check date and convert to us date
-function convertdate($date) {
-	global $_lang, $modx;
-	$timestamp = $modx->toTimeStamp($date);
-	return $timestamp;
-}
-
 $rs = $modx->db->select('DISTINCT internalKey, username, action, itemid, itemname', $modx->getFullTableName('manager_log'));
 $logs = $modx->db->makeArray($rs);
 
@@ -167,8 +160,8 @@ window.addEvent('domready', function() {
   </tbody>
 </table>
 </form>
-</div></div>
-<div class="section">
+</div>
+
 <div class="sectionHeader"><?php echo $_lang["mgrlog_qresults"]; ?></div><div class="sectionBody" id="lyr2">
 <?php
 if(isset($_REQUEST['log_submit'])) {
@@ -181,8 +174,8 @@ if(isset($_REQUEST['log_submit'])) {
 	if($_REQUEST['itemname']!='0')	$sqladd[] = "itemname='".$modx->db->escape($_REQUEST['itemname'])."'";
 	if($_REQUEST['message']!="")	$sqladd[] = "message LIKE '%".$modx->db->escape($_REQUEST['message'])."%'";
 	// date stuff
-	if($_REQUEST['datefrom']!="")	$sqladd[] = "timestamp>".convertdate($_REQUEST['datefrom']);
-	if($_REQUEST['dateto']!="")	$sqladd[] = "timestamp<".convertdate($_REQUEST['dateto']);
+	if($_REQUEST['datefrom']!="")	$sqladd[] = "timestamp>".$modx->toTimeStamp($_REQUEST['datefrom']);
+	if($_REQUEST['dateto']!="")	$sqladd[] = "timestamp<".$modx->toTimeStamp($_REQUEST['dateto']);
 
 	// If current position is not set, set it to zero
 	if( !isset( $_REQUEST['int_cur_position'] ) || $_REQUEST['int_cur_position'] == 0 ){
@@ -222,36 +215,35 @@ if(isset($_REQUEST['log_submit'])) {
 		// Display the result as you like...
 		print "<p>". $_lang["paging_showing"]." ". $array_paging['lower'];
 		print " ". $_lang["paging_to"] . " ". $array_paging['upper'];
-		print " (". $array_paging['total'] . " " . $_lang["paging_total"] . ")";
-		print "<br />". $array_paging['first_link'] . $_lang["paging_first"] . (isset($array_paging['first_link']) ? "</a> " : " ");
-		print $array_paging['previous_link'] . $_lang["paging_prev"] . (isset($array_paging['previous_link']) ? "</a> " : " ");
+		print " (". $array_paging['total'] . " " . $_lang["paging_total"] . ")<br />";
+		$paging = $array_paging['first_link'] . $_lang["paging_first"] . (isset($array_paging['first_link']) ? "</a> " : " ");
+		$paging .= $array_paging['previous_link'] . $_lang["paging_prev"] . (isset($array_paging['previous_link']) ? "</a> " : " ");
 		$pagesfound = sizeof($array_row_paging);
 		if($pagesfound>6) {
-			print $array_row_paging[$current_row-2]; // ."&nbsp;";
-			print $array_row_paging[$current_row-1]; // ."&nbsp;";
-			print $array_row_paging[$current_row]; // ."&nbsp;";
-			print $array_row_paging[$current_row+1]; // ."&nbsp;";
-			print $array_row_paging[$current_row+2]; // ."&nbsp;";
+			$paging .= $array_row_paging[$current_row-2]; // ."&nbsp;";
+			$paging .= $array_row_paging[$current_row-1]; // ."&nbsp;";
+			$paging .= $array_row_paging[$current_row]; // ."&nbsp;";
+			$paging .= $array_row_paging[$current_row+1]; // ."&nbsp;";
+			$paging .= $array_row_paging[$current_row+2]; // ."&nbsp;";
 		} else {
 			for( $i=0; $i<$pagesfound; $i++ ){
-				print $array_row_paging[$i] ."&nbsp;";
+				$paging .= $array_row_paging[$i] ."&nbsp;";
 			}
 		}
-		print $array_paging['next_link'] . $_lang["paging_next"] . (isset($array_paging['next_link']) ? "</a> " : " ") . " ";
-		print $array_paging['last_link'] . $_lang["paging_last"] . (isset($array_paging['last_link']) ? "</a> " : " ") . "</p>";
+		$paging .= $array_paging['next_link'] . $_lang["paging_next"] . (isset($array_paging['next_link']) ? "</a> " : " ") . " ";
+		$paging .= $array_paging['last_link'] . $_lang["paging_last"] . (isset($array_paging['last_link']) ? "</a> " : " ") . "</p>";
+		echo $paging;
 		// The above exemple print somethings like:
 		// Results 1 to 20 of 597  <<< 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 >>>
 		// Of course you can now play with array_row_paging in order to print
 		// only the results you would like...
 		?>
 		<script type="text/javascript" src="media/script/tablesort.js"></script>
-		<table border="0" cellpadding="2" cellspacing="1" bgcolor="#ccc" class="sortabletable rowstyle-even" id="table-1" width="%100">
+		<table class="sortabletable rowstyle-even" id="table-1">
 		<thead><tr>
 			<th class="sortable"><b><?php echo $_lang["mgrlog_username"]; ?></b></th>
-			<th class="sortable"><b><?php echo $_lang["mgrlog_actionid"]; ?></b></th>
+			<th class="sortable"><b><?php echo $_lang["mgrlog_action"]; ?></b></th>
 			<th class="sortable"><b><?php echo $_lang["mgrlog_itemid"]; ?></b></th>
-			<th class="sortable"><b><?php echo $_lang["mgrlog_itemname"]; ?></b></th>
-			<th class="sortable"><b><?php echo $_lang["mgrlog_msg"]; ?></b></th>
 			<th class="sortable"><b><?php echo $_lang["mgrlog_time"]; ?></b></th>
 		</tr></thead>
 		<tbody>
@@ -260,12 +252,20 @@ if(isset($_REQUEST['log_submit'])) {
 		$logentries = array();
 		$i = 0;
 		while ($logentry = $modx->db->getRow($rs)) {
+			if (!preg_match("/^[0-9]+$/", $logentry['itemid'])) {
+				$item = '<div style="text-align:center;">-</div>';
+			} elseif ($logentry['action'] == 3 || $logentry['action'] == 27 || $logentry['action'] == 5) {
+				$item = '<a href="index.php?a=3&amp;id=' . $logentry['itemid'] . '">'
+						. '[' . $logentry['itemid'] . '] ' . $logentry['itemname'] . '</a>';
+			} else {
+				$item = '[' . $logentry['itemid'] . '] ' . $logentry['itemname'];
+			}
+			//index.php?a=13&searchuser=' . $logentry['internalKey'] . '&action=' . $logentry['action'] . '&itemname=' . $logentry['itemname'] . '&log_submit=true'
+			$user_drill = 'index.php?a=13&searchuser=' . $logentry['internalKey'] . '&itemname=0&log_submit=true';
 			?><tr class="<?php echo ($i % 2 ? 'even' : ''); ?>">
-			<td><?php echo '<a href="index.php?a=12&amp;id='.$logentry['internalKey'].'">'.$logentry['username'].'</a>'; ?></td>
-			<td><?php echo $logentry['action']; ?></td>
-			<td><?php echo $logentry['itemid']=="-" ? "" : $logentry['itemid'] ; ?></td>
-			<td><?php echo $logentry['itemname']; ?></td>
-			<td><?php echo $logentry['message']; ?></td>
+			<td><?php echo '<a href="'.$user_drill.'">'.$logentry['username'].'</a>'; ?></td>
+			<td><?php echo '[' . $logentry['action'] .'] ' . $logentry['message']; ?></td>
+			<td><?php echo $item ; ?></td>
 			<td><?php echo $modx->toDateFormat($logentry['timestamp']+$server_offset_time); ?></td>
 		</tr>
 		<?php
@@ -275,6 +275,7 @@ if(isset($_REQUEST['log_submit'])) {
 	</tbody>
 	</table>
 	<?php
+	echo $paging;
 	}
 	?>
 	</div></div>

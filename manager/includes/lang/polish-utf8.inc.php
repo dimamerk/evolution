@@ -1,29 +1,23 @@
 <?php
 /**
- * Filename:       includes/lang/polish-utf8.inc.php
- * Function:       Language file.
- * Encoding:       UTF8
- * Author:         The MODx Project Team
- * 
- * Translation and revision for MODX v. 1.0.10 by:
- *					Piotr Matysiak - web@pm-fx.com
- * 
- * Translation and revision for MODx v. 1.0.4 by:
- *					Radosław Włodkowski - radoslaw@wlodkowski.net
- * 
- * Translation for MODx v. 1.0 by:
- *					Piotr Grzeszykowski - piotrek@gawinet.pl 
+ * MODX Manager language file
  *
- * based on v. 0.9.1/0.9.5 translation by:
- *					Piotr Łukańko - piotr.lukanko@gmail.com
- *                	Łukasz Kowalczyk - lukasz@pixeligence.com
+ * @version 1.0.13
+ * @date 31/12/2013
+ * @author Łukasz Kowalczyk, lukasz@pixeligence.com
+ * @author Piotr Łukańko, piotr.lukanko@gmail.com
+ * @author Piotr Grzeszykowski, piotrek@gawinet.pl
+ * @author Radosław Włodkowski, radoslaw@wlodkowski.net
+ * @author Piotr Matysiak, web@pm-fx.com
+ * @author Witek Galecki
  *
- * Date:           24 October 2013
-
- * Version:        1.6
- * MODx version:   Evolution 1.0.13
-*/
-
+ * @language Polish
+ * @package modx
+ * @subpackage manager
+ *
+ * Please commit your language changes on Transifex (https://www.transifex.com/projects/p/modx-evolution/) or on GitHub (https://github.com/modxcms/evolution).
+ */
+//$modx_textdir = 'rtl'; // uncomment this line for RTL langauges
 $modx_lang_attribute = 'pl'; // Manager HTML/XML Language Attribute see http://en.wikipedia.org/wiki/ISO_639-1
 $modx_manager_charset = 'UTF-8';
 
@@ -193,7 +187,7 @@ $_lang["create_resource_title"] = 'Utwórz dokument w tym miejscu';
 $_lang["create_weblink_here"] = 'Utwórz odsyłacz w tym miejscu';
 $_lang["createdon"] = 'Data utworzenia';
 $_lang["credits"] = 'Autorzy';
-$_lang["credits_shouts_msg"] = '<ul><li><b>Raymond Irving, Ryan Thrash</b> - założyciele projektu</li><li><b>Jason Coward, Victor Brilon, Adam Crownoble, Jeff Whitfield, Remon Sijrier</b> - architektura i projekt jądra</li></ul>';
+$_lang["credits_shouts_msg"] = '<p>MODX is managed and maintained at <a href="http://modx.com/" target="_blank">modx.com</a>.</p>';
 $_lang["custom_contenttype_message"] = 'Tutaj możesz dodać własne typy treści, które zostaną użyte w dokumentach. Aby dodać nową pozycję wprowadź typ treści w polu tekstowym i naciśnij przycisk \'Dodaj\'.';
 $_lang["custom_contenttype_title"] = 'Własne typy treści:';
 $_lang["database_charset"] = 'Baza danych - zestaw znaków';
@@ -581,12 +575,13 @@ $_lang["new_keyword"] = 'Dodaj nowe słowo kluczowe:';
 $_lang["new_module"] = 'Nowy moduł';
 $_lang["new_parent"] = 'Nowy dokument nadrzędny';
 $_lang["new_plugin"] = 'Nowa wtyczka';
-$_lang["new_role"] = 'Utwórz nową rolę';
+$_lang["new_role"] = 'Nowa Rola';
 $_lang["new_snippet"] = 'Nowy snippet';
 $_lang["new_template"] = 'Nowy szablon';
 $_lang["new_tmplvars"] = 'Nowa Zmienna Szablonu';
 $_lang["new_user"] = 'Nowy użytkownik';
 $_lang["new_web_user"] = 'Nowy użytkownik web';
+$_lang["new_resource"] = 'Nowy dokument';
 $_lang["no"] = 'Nie';
 $_lang["no_active_users_found"] = 'Nie znaleziono aktywnych użytkowników.';
 $_lang["no_activity_message"] = 'Jeszcze nie utworzyłeś lub edytowałeś żadnego dokumentu.';
@@ -1105,6 +1100,8 @@ $_lang["user_use_config"] = 'Używaj ustawienia głównej konfiguracji';
 $_lang["user_zip"] = 'Kod pocztowy';
 $_lang["username"] = 'Nazwa użytkownika';
 $_lang["users"] = 'Użytkownicy';
+$_lang["valid_hostnames_message"] = 'Pomóż zapobiegać atakom XSS wykorzystującym ustawienie systemowe site_url. Wprowadź listę prawidłowych nazw hosta dla tej instalacji, oddzielonych przecinkami. Jest to ważne na niektórych typach hostów współdzielonych i hostach dostępnych bezpośrednio pod adresem IP. Pierwsza nazwa hosta na liście zostanie użyta, jeśli HTTP_HOST nie będzie odpowiadał żadnej z prawidłowych nazw hosta na liście.';
+$_lang["valid_hostnames_title"] = 'Prawidłowe nazwy hosta';
 $_lang["validate_referer_message"] = 'Możesz weryfikować nagłówki HTTP_REFERER aby zmniejszyć ryzyko ataków typu CSRF (Cross Site Request Forgery). Niektóre konfiguracje mogą nie mieć możliwości korzystania z tej opcji, jeżeli serwer nie wysyła nagłówków HTTP_REFERER.';
 $_lang["validate_referer_title"] = 'Weryfikuj nagłówki HTTP_REFERER';
 $_lang["value"] = 'Wartość';
@@ -1180,6 +1177,8 @@ $_lang["files.dynamic.php1"] = 'Utwórz plik tekstowy';
 $_lang["files.dynamic.php2"] = 'Ten katalog nie może zostać wyświetlony.';
 $_lang["files.dynamic.php3"] = 'Wystąpił problem z nazwą pliku.';
 $_lang["files.dynamic.php4"] = 'Plik tekstowy został utworzony.';
+$_lang["files_dynamic_new_folder_name"] = 'Enter new directory name:';
+$_lang["files_dynamic_new_file_name"] = 'Enter new file name:';
 $_lang["not_readable_dir"] = 'Nie można odczytać katalogu.';
 $_lang["confirm_delete_dir"] = 'Czy na pewno chcesz usunąć ten katalog?';
 $_lang["confirm_delete_dir_recursive"] = 'Czy na pewno chcesz usunąć ten katalog?\n\nWszystkie jego pliki również zostaną usunięte.';

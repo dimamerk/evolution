@@ -1,5 +1,5 @@
 <?php
-if(!defined('IN_MANAGER_MODE') || IN_MANAGER_MODE != 'true') exit();
+if(IN_MANAGER_MODE!="true") die("<b>INCLUDE_ORDERING_ERROR</b><br /><br />Please use the MODX Content Manager instead of accessing this file directly.");
 if(!$modx->hasPermission('bk_manager')) {
 	$e->setError(3);
 	$e->dumpError();
@@ -105,11 +105,12 @@ elseif ($mode=='snapshot')
 			$tables[] = $db_status['Name'];
 		}
 	}
-	$today = $modx->toDateFormat(time());
-	$today = str_replace(array('/',' '), '-', $today);
-	$today = str_replace(':', '', $today);
-	$today = strtolower($today);
-	global $path;
+	//$today = $modx->toDateFormat(time());
+	//$today = str_replace(array('/',' '), '-', $today);
+	//$today = str_replace(':', '', $today);
+	//$today = strtolower($today);
+    $today = date('Y-m-d_H-i-s');
+    global $path;
 	$path = "{$modx->config['snapshot_path']}{$today}.sql";
 	
 	@set_time_limit(120); // set timeout limit to 2 minutes

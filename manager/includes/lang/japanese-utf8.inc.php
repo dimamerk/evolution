@@ -1,17 +1,21 @@
 <?php
 /**
- * Filename:       includes/lang/japanese-utf8.inc.php
- * Function:       Japanese language file.
- * Encoding:       UTF8
- * Author:         eastbind
- * Author:         MEGU              - http://modx.liolion.net/
- * Author:         yamamoto          - http://kyms.jp
- * Date:           2013/10/24
- * Version:        1.0.13
- * MODX version:   Evolution 1.0.0 - 1.0.13
-*/
+ * MODX Manager language file
+ *
+ * @version 1.0.13
+ * @date 31/12/2013
+ * @author eastbind
+ * @author MEGU
+ * @author yamamoto
+ *
+ * @language Japanese
+ * @package modx
+ * @subpackage manager
+ *
+ * Please commit your language changes on Transifex (https://www.transifex.com/projects/p/modx-evolution/) or on GitHub (https://github.com/modxcms/evolution).
+ */
 //$modx_textdir = 'rtl'; // uncomment this line for RTL langauges
-$modx_lang_attribute = 'ja'; // Manager HTML and XML Language Attribute
+$modx_lang_attribute = 'ja'; // Manager HTML/XML Language Attribute see http://en.wikipedia.org/wiki/ISO_639-1
 $modx_manager_charset = 'UTF-8';
 
 $_lang["about_msg"] = '<p>MODX(モドエックスまたはモッドエックス)は <a href="http://ja.wikipedia.org/wiki/MODX" target="_blank">PHP アプリケーション フレームワーク・コンテンツ管理システム</a>です。GPL に基づいて使用が許諾されます。</p>';
@@ -180,7 +184,7 @@ $_lang["create_resource_title"] = 'リソースを投稿';
 $_lang["create_weblink_here"] = 'ウェブリンクを作成';
 $_lang["createdon"] = '作成日時';
 $_lang["credits"] = '著作権表示/謝辞';
-$_lang["credits_shouts_msg"] = '<p>MODX is managed and maintained at <a href="http://www.modx.com/company/" target="_blank">modx.com</a>.</p>';
+$_lang["credits_shouts_msg"] = '<p>MODX is managed and maintained at <a href="http://modx.com/" target="_blank">modx.com</a>.</p>';
 $_lang["custom_contenttype_message"] = 'リソースが使用するコンテントタイプに独自のタイプを追加できます。新しいタイプを追加するにはテキストボックスに入力して「追加」ボタンをクリックします。';
 $_lang["custom_contenttype_title"] = 'カスタムコンテントタイプ';
 $_lang["database_charset"] = 'データベース文字コード';
@@ -418,7 +422,7 @@ $_lang["maxImageWidth_message"] = 'If uploaded image resolution exceeds this set
 $_lang["maxImageHeight_message"] = 'If uploaded image resolution exceeds this setting it will be automatically resized. Set 0 to avoid.';
 $_lang["thumbWidth_message"] = 'Maximum thumbnail width.';
 $_lang["thumbHeight_message"] = 'Maximum thumbnail height.';
-$_lang["thumbsDir_message"] = 'The name of previews folder.';
+$_lang["thumbsDir_message"] = 'The name of thumbnail directory.';
 $_lang["jpegQuality_message"] = 'JPEG compression quality of thumbnails and resized images';
 $_lang["showHiddenFiles"] = 'Show hidden files in file browser';
 $_lang["keyword"] = 'キーワード';
@@ -573,12 +577,13 @@ $_lang["new_keyword"] = 'キーワードを追加';
 $_lang["new_module"] = 'モジュールを作成';
 $_lang["new_parent"] = '移動先の親リソース';
 $_lang["new_plugin"] = 'プラグインを作成';
-$_lang["new_role"] = 'ロールを作成';
+$_lang["new_role"] = '新規ロール';
 $_lang["new_snippet"] = 'スニペットを作成';
 $_lang["new_template"] = 'テンプレートを作成';
 $_lang["new_tmplvars"] = 'テンプレート変数を作成';
 $_lang["new_user"] = 'ユーザーを作成';
 $_lang["new_web_user"] = 'ウェブユーザーを作成';
+$_lang["new_resource"] = '新規リソース';
 $_lang["no"] = 'いいえ';
 $_lang["no_active_users_found"] = '管理画面にログインしているメンバーはいません。';
 $_lang["no_activity_message"] = 'まだリソースを作成または編集していません。';
@@ -1101,6 +1106,8 @@ $_lang["user_use_config"] = 'グローバル設定を使用';
 $_lang["user_zip"] = '郵便番号';
 $_lang["username"] = 'ログイン名';
 $_lang["users"] = '権限管理';
+$_lang["valid_hostnames_message"] = 'Help prevent XSS exploits misusing the site_url system setting by providing a comma separated list of valid hostnames for this installation. This is important for some types of shared hosts or hosts direct accessible via an IP address. First hostname in the list is used if the HTTP_HOST does not match any valid hostname.';
+$_lang["valid_hostnames_title"] = 'Valid hostnames';
 $_lang["validate_referer_message"] = 'リファラチェック(参照元チェック)を行い、<a href="http://www.google.com/search?hl=ja&q=csrf" target="_blank">(CSRF=Cross Site Request Forgery)</a>をある程度回避できます。万全ではありませんので、管理画面にログイン中は不用意に外部サイトを閲覧しない・こまめにログアウトするなどを習慣づけてください。';
 $_lang["validate_referer_title"] = '管理画面操作のリファラチェック';
 $_lang["value"] = '値';
@@ -1176,18 +1183,20 @@ $_lang["files.dynamic.php1"] = 'テキストファイルを新規作成';
 $_lang["files.dynamic.php2"] = 'このディレクトリは参照できません';
 $_lang["files.dynamic.php3"] = 'ファイル名が不正です。';
 $_lang["files.dynamic.php4"] = 'テキストファイルを作成しました。';
+$_lang["files_dynamic_new_folder_name"] = 'ディレクトリ名';
+$_lang["files_dynamic_new_file_name"] = 'ファイル名';
 $_lang["not_readable_dir"] = 'ディレクトリが存在しないか、PHPスクリプトがこのディレクトリにアクセスする権限がありません。';
 $_lang["confirm_delete_dir"] = 'このディレクトリを削除してもよろしいですか?';
 $_lang["confirm_delete_dir_recursive"] = 'ディレクトリ内にファイルが存在します。\nこのディレクトリを削除してもよろしいですか?';
 
-$_lang["make_folders_title"] = 'Make end slash URL at the container';
-$_lang["make_folders_message"] = 'The slash to append to Resources set as containers when using FURLs.';
+$_lang["make_folders_title"] = 'End Container URL with Slash';
+$_lang["make_folders_message"] = 'Append trailing slash to Resources that are set as containers when using Friendly URLs.';
 
 $_lang["check_files_onlogin_title"] = 'Check core files on login';
 $_lang["check_files_onlogin_message"] = 'By enabling this option, important system files will be checked for modification typical of scripted website attacks. While not a foolproof guarantee, it may alert you to a compromised MODX system file and website.';
 
 $_lang["configcheck_sysfiles_mod"] = 'Important System Files have been modified.';
-$_lang["configcheck_sysfiles_mod_msg"] = 'You have enabled the setting to check important system files to detect possible website script attacks. This doesn\'t necessarily mean that your site has been compromised, however, you should review the all files on server. Please update System configuration if you do not have any problem.';
+$_lang["configcheck_sysfiles_mod_msg"] = 'You have configured MODX to check important system files for possible website script attacks. This does not necessarily mean your site has been compromised, however, you should review the watched files in your installation (set in System configuration -> User -> Check core files on login). If you find your files unaltered or changes  were made by site administrators, go to System Configuration and click to re-save settings to dismiss this message.';
 
 $_lang['email_method_title'] = 'Sendmail method';
 $_lang['email_method_mail'] = 'PHP mail() function';
@@ -1199,44 +1208,44 @@ $_lang['smtp_password_title'] = 'SMTP パスワード';
 $_lang['smtp_port_title'] = 'SMTP ポート';
 
 $_lang["setting_resource_tree_node_name"] = 'リソースツリーのノード名';
-$_lang["setting_resource_tree_node_name_desc"] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Defaults to pagetitle, although any Resource field can be used, such as menutitle, alias.';
+$_lang["setting_resource_tree_node_name_desc"] = 'Select the Resource field to show as the Resource name in the Resource Tree. The default setting is pagetitle.';
 
-$_lang["resource_opt_alvisibled"] = 'in URL';
-$_lang["resource_opt_alvisibled_help"] = 'alias in url';
+$_lang["resource_opt_alvisibled"] = 'Use current alias in alias path';
+$_lang["resource_opt_alvisibled_help"] = 'The alias of this Resource is inserted in Friendly URL alias path';
 $_lang['resource_opt_is_published'] = 'Published';
-$_lang["docid_incrmnt_method_title"] = 'Increment method Resource ID';
+$_lang["docid_incrmnt_method_title"] = 'Increment Resource ID method';
 $_lang["docid_incrmnt_method_0"] = 'DB auto increment';
 $_lang["docid_incrmnt_method_1"] = 'Minimum missed ID';
-$_lang["docid_incrmnt_method_2"] = 'Maximal ID+1';
+$_lang["docid_incrmnt_method_2"] = 'Maximal ID + 1';
 
 $_lang["cache_type_title"] = 'Document caching type';
-$_lang["cache_type_1"] = 'Cache is based only on document id (standard)';
-$_lang["cache_type_2"] = 'Cache is based on document id and $_GET parameters';
+$_lang["cache_type_1"] = 'Cache is based only on Resource ID (standard)';
+$_lang["cache_type_2"] = 'Cache is based on Resource ID and $_GET parameters';
 $_lang["seostrict_title"] = 'Use SEO Strict URLs';
-$_lang["seostrict_message"] = 'Enforces the use of strict URLs to prevent duplicate content if needed';
+$_lang["seostrict_message"] = 'Enforces the use of strict URLs to prevent duplicate content (if needed)';
 
-$_lang["settings_friendlyurls_alert"] = 'It is necessary to rename the ht.access file of a MODX installation directory at .htaccess to use the Friendly URL function.';
-$_lang["settings_friendlyurls_alert2"] = 'Since it has installed in a subdirectory, it is necessary to change the contents of .htaccess.';
+$_lang["settings_friendlyurls_alert"] = 'It is necessary to rename the ht.access file in the MODX installation directory at .htaccess to use the Friendly URL function.';
+$_lang["settings_friendlyurls_alert2"] = 'Since MODX was installed in a subdirectory, it is necessary to change the content of .htaccess.';
 
 $_lang["user_street"] = '番地';
 $_lang["user_city"] = '市区町村';
 $_lang["user_other"] = 'その他';
 
 $_lang["import_site.static.php1"] = 'Reset resource tree';
-$_lang["import_site.static.php2"] = 'Reset resource tree, all IDs are initialize.';
+$_lang["import_site.static.php2"] = 'Reset resource tree and initialize all Resource IDs.';
 $_lang["import_site.static.php3"] = 'Target';
-$_lang["import_site.static.php4"] = '&lt;body&gt;&lt;/body&gt; only';
-$_lang["import_site.static.php5"] = 'File contain all';
+$_lang["import_site.static.php4"] = 'Only &lt;body&gt;&lt;/body&gt; part';
+$_lang["import_site.static.php5"] = 'Whole file content';
 
-$_lang["a83_ignore_ids_title"] = 'Ignore IDs(comma separate)';
+$_lang["a83_ignore_ids_title"] = 'Ignore IDs (comma separated)';
 $_lang["export_site.static.php1"] = 'Target';
-$_lang["export_site.static.php2"] = 'Only edited resources';
-$_lang["export_site.static.php3"] = 'All resources';
-$_lang["export_site.static.php4"] = 'Replace string (before)';
-$_lang["export_site.static.php5"] = 'Replace string (after)';
+$_lang["export_site.static.php2"] = 'Only edited Resources';
+$_lang["export_site.static.php3"] = 'All Resources';
+$_lang["export_site.static.php4"] = 'Search for';
+$_lang["export_site.static.php5"] = 'Replace with';
 $_lang["export_site.static.php6"] = 'Target';
-$_lang["export_site.static.php7"] = 'Files cannot be outputted to [+rb_base_url+]';
+$_lang["export_site.static.php7"] = 'Files could not be saved to [+rb_base_url+]';
 
-$_lang["mutate_settings.dynamic.php6"] = 'email notifies system error.';
+$_lang["mutate_settings.dynamic.php6"] = 'Send mail on MODX errors';
 $_lang["mutate_settings.dynamic.php7"] = 'not notify';
-$_lang["mutate_settings.dynamic.php8"] = 'It notifies to [(emailsender)]([+emailsender+]) at the time of error generating. The details of the contents of the error should check an event log.';
+$_lang["mutate_settings.dynamic.php8"] = 'A mail with the error source will be sent to [(emailsender)] ([+emailsender+]) if a MODX error occurs. The details of the error could be seen in the MODX system events log.';

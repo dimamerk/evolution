@@ -1,7 +1,5 @@
 <?php
-if (IN_MANAGER_MODE != "true")
-	die("<b>INCLUDE_ORDERING_ERROR</b><br /><br />Please use the MODX Content Manager instead of accessing this file directly.");
-
+if (IN_MANAGER_MODE != "true") die("<b>INCLUDE_ORDERING_ERROR</b><br /><br />Please use the MODX Content Manager instead of accessing this file directly.");
 if (!$modx->hasPermission('save_document')) {
 	$e->setError(3);
 	$e->dumpError();
@@ -517,7 +515,8 @@ switch ($actionToTake) {
 			echo "Document is linked to site_start variable and cannot be unpublished!";
 			exit;
 		}
-		if ($id == $site_start && ($pub_date != "0" || $unpub_date != "0")) {
+		$today = time();
+		if ($id == $site_start && ($pub_date > $today || $unpub_date != "0")) {
 			$modx->manager->saveFormValues(27);
 			echo "Document is linked to site_start variable and cannot have publish or unpublish dates set!";
 			exit;

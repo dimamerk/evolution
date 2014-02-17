@@ -1,6 +1,6 @@
 <?php
 /**
- *	MODx Document Parser
+ *	MODX Document Parser
  *	Function: This class contains the main document parsing functions
  *
  */
@@ -260,7 +260,7 @@ class DocumentParser {
     }
     
     /**
-     * Get MODx settings including, but not limited to, the system_settings table
+     * Get MODX settings including, but not limited to, the system_settings table
      */
     function getSettings() {
         $tbl_system_settings   = $this->getFullTableName('system_settings');
@@ -506,7 +506,7 @@ class DocumentParser {
            if(!empty($_GET)) $md5_hash = '_' . md5(http_build_query($_GET));
            $cacheFile= "assets/cache/docid_" . $id .$md5_hash. ".pageCache.php";
         }else{
-        $cacheFile= "assets/cache/docid_" . $id . ".pageCache.php";
+           $cacheFile= "assets/cache/docid_" . $id . ".pageCache.php";
         }
         if (file_exists($cacheFile)) {
             $this->documentGenerated= 0;
@@ -726,7 +726,7 @@ class DocumentParser {
             }
 
             // clear the cache
-            $modx->clearCache();
+            $this->clearCache();
 
             // update publish time file
             $timesArr= array ();
@@ -1350,12 +1350,14 @@ class DocumentParser {
                 $qstring = isset($url_query_string) ? preg_replace("#(^|&)(q|id)=[^&]+#", '', $url_query_string) : ''; // Strip conflicting id/q from query string
                 if ($qstring) $url = "{$site_url}?{$qstring}";
                 else          $url = $site_url;
-                if (empty($_POST)){
-	                if (('/?'.$qstring) != $_SERVER['REQUEST_URI']) {
-                $this->sendRedirect($url,0,'REDIRECT_HEADER', 'HTTP/1.0 301 Moved Permanently');
-                exit(0);
-                   }
-                }
+                if ($this->config['base_url'] != $_SERVER['REQUEST_URI']){	
+	                if (empty($_POST)){
+	                	if (('/?'.$qstring) != $_SERVER['REQUEST_URI']) {
+	                		$this->sendRedirect($url,0,'REDIRECT_HEADER', 'HTTP/1.0 301 Moved Permanently');
+	                		exit(0);
+	                	}
+	                }
+	            }  
              }
         }elseif ($url_path != $strictURL && $this->documentIdentifier != $this->config['error_page']){
              // Force page redirect
@@ -1395,7 +1397,7 @@ class DocumentParser {
         if ($docgrp= $this->getUserDocGroups())
             $docgrp= implode(",", $docgrp);
         // get document
-        $access= ($this->isFrontend() ? "sc.privateweb=0" : "1='" . $_SESSION['mgrRole'] . "' OR sc.privatemgr=0") .
+        $access=  "1='" . $_SESSION['mgrRole'] . "'" . ($this->isFrontend() ? " OR sc.privateweb=0" : " OR sc.privatemgr=0") .
          (!$docgrp ? "" : " OR dg.document_group IN ($docgrp)");
         $sql= "SELECT sc.*
               FROM $tblsc sc
@@ -1460,7 +1462,7 @@ class DocumentParser {
     /**
      * Parse a source string.
      *
-     * Handles most MODx tags. Exceptions include:
+     * Handles most MODX tags. Exceptions include:
      *   - uncached snippet tags [!...!]
      *   - URL tags [~...~]
      *
@@ -1599,7 +1601,11 @@ class DocumentParser {
                     $this->sendErrorPage();
                 }
             } else {
-                $this->documentIdentifier= $this->documentListing[$this->documentIdentifier];
+                if (isset($this->documentListing[$this->documentIdentifier])) {
+                    $this->documentIdentifier = $this->documentListing[$this->documentIdentifier];
+				} else {
+					$this->documentIdentifier = (int) $this->documentIdentifier;
+				}
             }
             $this->documentMethod= 'id';
         }

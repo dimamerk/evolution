@@ -105,8 +105,8 @@ $table_prefix = $modx->dbConfig['table_prefix'];
             $message = str_replace("[+semail+]",$emailsender,$message);
             $message = str_replace("[+surl+]",$url,$message);
 
-            if (!ini_get('safe_mode')) $sent = mail($email, "New Password Activation for $site_name", $message, "From: ".$emailsender."\r\n"."X-Mailer: MODx Content Manager - PHP/".phpversion(), "-f {$emailsender}");
-            else $sent = mail($email, "New Password Activation for $site_name", $message, "From: ".$emailsender."\r\n"."X-Mailer: MODx Content Manager - PHP/".phpversion());
+            if (!ini_get('safe_mode')) $sent = mail($email, "New Password Activation for $site_name", $message, "From: ".$emailsender."\r\n"."X-Mailer: MODX Content Manager - PHP/".phpversion(), "-f {$emailsender}");
+            else $sent = mail($email, "New Password Activation for $site_name", $message, "From: ".$emailsender."\r\n"."X-Mailer: MODX Content Manager - PHP/".phpversion());
             if(!$sent) {
                 // error
                 $output =  webLoginAlert("Error while sending mail to $email. Please contact the Site Administrator");
@@ -303,7 +303,7 @@ $table_prefix = $modx->dbConfig['table_prefix'];
         }
     }
 
-    if(isset($modx->config['use_captcha']) && $modx->config['use_captcha']==1) {
+    if(isset($modx->config['use_captcha']) && $modx->config['use_captcha']==1 && isset($_POST['cmdwebsignup'])) {
         if($_SESSION['veriword']!=$captcha_code) {
             $output = webLoginAlert("The security code you entered didn't validate! Please try to login again!");
             $newloginerror = 1;

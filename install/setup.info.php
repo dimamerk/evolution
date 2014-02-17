@@ -1,5 +1,5 @@
 <?php
-//:: MODx Installer Setup file 
+//:: MODX Installer Setup file
 //:::::::::::::::::::::::::::::::::::::::::
 if (file_exists(dirname(__FILE__)."/../assets/cache/siteManager.php")) {
     include_once(dirname(__FILE__)."/../assets/cache/siteManager.php");
@@ -177,7 +177,7 @@ if(is_dir($modulePath) && is_readable($modulePath)) {
 		if (intval($params['shareparams']) || !empty($params['dependencies'])) {
 			$dependencies = explode(',', $dependencies);
 			foreach ($dependencies as $dependency) {
-				$dependency = explode(':', $templatePath);
+				$dependency = explode(':', $dependency);
 				switch (trim($dependency[0])) {
 					case 'template':
 						$mdp[] = array(
